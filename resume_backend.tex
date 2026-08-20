@@ -1,0 +1,201 @@
+\documentclass[]{resume}
+
+\usepackage{XCharter}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{geometry}
+
+% ---------- Space / layout fixes ----------
+\geometry{left=0.32in,right=0.32in,top=0.48in,bottom=0.32in}
+\setlength{\tabcolsep}{5pt}
+\setlength{\parskip}{0pt}
+
+% resume.cls auto-prints \name/\address at \begin{document}; disable it since we use a custom header.
+\makeatletter
+\renewcommand{\printname}{}
+\renewcommand{\printaddress}[1]{}
+\makeatother
+\newcommand{\sectionvspace}{\vspace{1.5pt}}
+
+% ---------- Header ----------
+\definecolor{HeaderOrange}{HTML}{F36C21}
+\definecolor{HeaderLight}{HTML}{F7F7F7}
+
+\newcommand{\MakeHeader}[8]{%
+\noindent
+{\centering \bfseries \LARGE #1 \par}
+\vspace{2pt}
+
+\noindent
+\colorbox{HeaderOrange}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \centering
+    {\color{white}\bfseries\normalsize #2}
+    \vspace{2pt}
+  }%
+}\par
+
+\noindent
+\colorbox{HeaderLight}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \small
+    \faPhone\ #3 \hfill
+    \faEnvelope\ \href{mailto:#4}{#4} \hfill
+    \faMapMarker*\ #5 \hfill
+    \faLinkedin\ \href{#6}{kexinchu} \hfill
+    \faGithub\ \href{#7}{kexinchu} \hfill
+    \faGraduationCap\ \href{#8}{Google Scholar}
+    \vspace{2pt}
+  }%
+}\par
+}
+
+\begin{document}
+
+\MakeHeader
+{Kexin Chu}
+{Backend Engineer}
+{(+1) 959-995-3930}
+{kexin.chu@uconn.edu}
+{Farmington, CT}
+{https://www.linkedin.com/in/kexin-chu-69a481192}
+{https://kexinchu.github.io/}
+{https://scholar.google.com/citations?user=ZIdS3d0AAAAJ}
+
+% ===================== SUMMARY =====================
+\begin{rSection}{Summary}\sectionvspace
+\begin{itemize}[leftmargin=1.2em, itemsep=0.15em, topsep=0.2em]
+    \item Backend engineer with 4 years of experience building and scaling online services and data pipelines at Baidu Search.
+    \item Strong in distributed systems, microservice architecture, stream+batch processing, caching, and performance optimization.
+    \item Built and refactored production systems for search, recommendation, content distribution, and access control at internet scale.
+    \item Delivered measurable impact on freshness, latency, scalability, and business metrics, including systems serving 150M daily visits and 600M pushes/day.
+\end{itemize}
+\end{rSection}
+
+% ===================== EXPERIENCE =====================
+\begin{rSection}{Experience}\sectionvspace
+
+\textbf{Baidu, Inc. (China’s leading search engine company, called “the Google of China”)} \hfill \textit{Beijing, China}\\
+\textit{Senior Software Engineer} \hfill \textit{Jul 2020 -- Aug 2024}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Worked on large-scale backend systems for Search Push \& Recommendation, DeepQA Search, streaming indexing, and LLM feature access management.
+    \item Promoted twice: T3$\rightarrow$T4 in Oct 2021 and T4$\rightarrow$T5 in Jul 2023; performance ranked top 30\% in 2021--2022.
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{Push \& Recommendation Service} \hfill \textit{Oct 2023 -- Aug 2024}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Designed \& built a backend platform for content distribution across search data, recommendation logic, and delivery channels.
+    \item Implemented a unified stream+batch pipeline for ingestion, transformation, feature generation, and downstream delivery.
+    \item Refactored storage and processing paths, reducing end-to-end data availability latency from 24 hours to 30 minutes.
+    \item Scaled the system to 600M pushes/day and 2.6M daily unique visitors, contributing about 320K CNY/day in revenue.
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{DeepQA Search Service} \hfill \textit{Jul 2020 -- Oct 2023}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Built and maintained backend services for offline indexing and online retrieval, including batch recall, and ranking interfaces.
+    \item Refactored legacy PHP services into modular Go services, enabling parallel retrieval of content, author, site, and recommendation signals. And reduced long-tail latency by 63\% through service decomposition.
+    \item Supported web QA, intelligent tag search, and LLM-enhanced search features for Baidu Search.
+    \item Operated services handling about 150M daily visits and supporting 600+ partner websites for custom page hosting.
+    \item Helped drive about 22M visits/day and 260K CNY/day in ad revenue through hosted content channels.
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{Streaming Data Indexing Pipeline} \hfill \textit{Oct 2021 -- May 2022}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Built a reusable stream+batch indexing service to replace a batch-only update workflow with 48-hour incremental latency.
+    \item Reduced incremental indexing time from 48 hours to 5 minutes, enabling near-real-time updates and faster iteration.
+    \item Extended the pipeline to support multiple products, including DeepQA, Note Search, and Local Life.
+    \item Supported 400+ data providers and about 40K daily updates for DeepQA; processed 600M+ cumulative Note Search updates.
+    \item Developed an internal trace tool that helped product and operations teams diagnose indexing failures and recurring data issues.
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{Wenxin Yiyan Access Management System} \hfill \textit{Nov 2022 - Mar 2023}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Built and maintained the access-management backend for integrating Wenxin Yiyan features into Baidu Search.
+    \item Implemented user activation, invitation, and eligibility verification workflows backed by MySQL and Redis.
+    \item Used Redis to cache permission state and support stable, low-latency access checks under high concurrency.
+    \item Supported registration and activation for more than 2 million users after launch.
+\end{itemize}
+
+\vspace{1.0ex}
+\textbf{Dcar, Inc. (An automotive content platform owned by ByteDance)} \hfill \textit{Beijing, China}\\
+\textit{ML System Engineer(Intern)} \hfill \textit{Apr 2025 -- Oct 2025}
+
+\textbf{LLM Serving for AI Car Selection} \hfill \textit{May 2025 -- Oct 2025}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Optimized the LLM serving system for Dcar's AI Car Selection service, supported over 400K+ daily requests.
+    \item Addressed deployment inefficiency where cross-node GPU inference was slower than single-node serving, while models such as DeepSeek and Kimi-K2 exceeded the memory budget of a single 8$\times$H20 node.
+    \item Designed a resource-aware system combining quantization, runtime offload/prefetch.
+    \item Improved large-model serving practicality by reducing memory pressure and optimizing runtime data movement.
+\end{itemize}
+
+\end{rSection}
+\newpage
+
+% ===================== PROJECTS =====================
+\begin{rSection}{Selected Research Projects}\sectionvspace
+\textbf{MCaM: Multi-Tier Cache Management for LLM Inference} \hfill \textit{Sep 2024 -- Dec 2025}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Built a multi-tier cache system with prefix hashing, deduplication, and memory-aware offloading across GPU and host memory.
+    \item Improved prefill latency by 69\% and increased throughput by 3.3$\times$ in prototype evaluation.
+    \item Demonstrates experience in cache design, memory management, and performance optimization for high-throughput systems.
+\end{itemize}
+
+\textbf{SafeKV: Cache Visibility Control for Shared LLM Serving} \hfill \textit{Apr 2025 -- Aug 2025}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Designed a cache management mechanism with per-entry visibility control for shared multi-tenant serving.
+    \item Combined metadata-based gating and asynchronous policy enforcement to balance performance and isolation.
+    \item Relevant to backend systems that require access control, shared-state management, and safe resource reuse.
+\end{itemize}
+\end{rSection}
+
+% ===================== EDUCATION =====================
+\begin{rSection}{Education}\sectionvspace
+\textbf{University of Connecticut}, CT, USA \hfill Ph.D. in Computer Science and Engineering \hfill \textit{Aug 2024 -- Present} 
+
+\textbf{Hefei University of Technology}, China \hfill M.S. in Electrical Engineering \hfill \textit{Aug 2017 -- Jun 2020}
+
+\textbf{Hefei University of Technology}, China \hfill B.S. in Electrical Engineering \hfill \textit{Aug 2013 -- Jun 2017}
+\end{rSection}
+
+% ===================== SKILLS =====================
+\begin{rSection}{Technical Skills}\sectionvspace
+\begin{tabular}{@{} >{\bfseries}l @{\hspace{2.2ex}} p{0.83\linewidth} @{}}
+Languages & Go, Python, C++ \\
+
+Backend \& Infra & Microservices, Kafka, Hadoop, Spark, PyTorch, vLLM, SGLang, CUDA, Faiss \\
+
+Databases \& Storage & MySQL, Redis, PostgreSQL, Hadoop, Kafka \\
+
+Frameworks \& Tools & Gin, gRPC, FastAPI, Docker, Git, Linux, CI/CD, profiling tools \\
+
+\end{tabular}
+\end{rSection}
+
+% ===================== PUBLICATIONS =====================
+\begin{rSection}{Publications}\sectionvspace
+\begin{itemize}[leftmargin=1.2em, itemsep=0.15em, topsep=0.2em]
+    \item K. Chu, et al. \textit{MCaM: Efficient LLM Inference with Multi-tier KV Cache Management}. ICDCS 2025.
+\end{itemize}
+\end{rSection}
+
+% ===================== AWARDS =====================
+\begin{rSection}{Awards}\sectionvspace
+\begin{itemize}[leftmargin=1.2em, itemsep=0.15em, topsep=0.2em]
+    \item Predoctoral Fellowship, University of Connecticut (2025)
+    \item Baidu Pride Special Award (2022)
+    \item Baidu Breakthrough Innovation Award (2021--2022)
+    \item National Scholarship, Hefei University of Technology (2018, 2019)
+\end{itemize}
+\end{rSection}
+
+\end{document}

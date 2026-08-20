@@ -1,0 +1,207 @@
+\documentclass[]{resume}
+
+\usepackage{XCharter}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5} % 图标
+
+% ---------- Space / layout fixes ----------
+\geometry{left=0.32in,right=0.32in,top=0.48in,bottom=0.32in}
+\usepackage{enumitem}
+\setlength{\tabcolsep}{5pt}
+\setlength{\parskip}{0pt}
+
+% resume.cls auto-prints \name/\address at \begin{document}; disable it since we use a custom header.
+\makeatletter
+\renewcommand{\printname}{}
+\renewcommand{\printaddress}[1]{}
+\makeatother
+\newcommand{\sectionvspace}{\vspace{1.5pt}}
+
+% ---------- Header ----------
+\definecolor{HeaderOrange}{HTML}{F36C21} % color
+\definecolor{HeaderLight}{HTML}{F7F7F7}
+\definecolor{HeaderRule}{HTML}{E0E0E0}
+
+\newcommand{\MakeHeader}[8]{%
+% #1  Name
+% #2  Title (eg. Software Engineer)
+% #3  Phone
+% #4  Email
+% #5  Location
+% #6  LinkedIn url
+% #7  GitHub url
+% #8  Scholar url
+% --- Name line ---
+\noindent
+{\centering \bfseries \LARGE #1 \par}
+\vspace{2pt}
+
+% --- Title bar ---
+\noindent
+\colorbox{HeaderOrange}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \centering
+    {\color{white}\bfseries\normalsize #2}
+    \vspace{2pt}
+  }%
+}\par
+
+% --- Contact bar ---
+\noindent
+\colorbox{HeaderLight}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \small
+    \faPhone\ #3 \hfill
+    \faEnvelope\ \href{mailto:#4}{#4} \hfill
+    \faMapMarker*\ #5 \hfill
+    \faLinkedin\ \href{#6}{kexinchu} \hfill
+    \faGithub\ \href{#7}{kexinchu} \hfill
+    \faGraduationCap\ \href{#8}{Google Scholar}
+    \vspace{2pt}
+  }%
+}\par
+}
+
+\begin{document}
+
+\MakeHeader
+{Kexin Chu}
+{ML Engineer}
+{(+1) 959-995-3930}
+{kexin.chu@uconn.edu}
+{Farmington, CT}
+{https://www.linkedin.com/in/kexin-chu-69a481192}
+{https://kexinchu.github.io/}
+{https://scholar.google.com/citations?user=ZIdS3d0AAAAJ}
+
+% ===================== SUMMARY =====================
+\begin{rSection}{Summary}\sectionvspace
+\item - Ph.D. student (CSE, UConn) focused on ML systems: LLM serving, MoE inference acceleration, and KV-cache management.
+\item - 4 years as a Senior Software Engineer at Baidu Search, owning high-traffic online services and large-scale data pipelines.
+\item - Strong in backend architecture for recommendation/search: API services, asynchronous job orchestration (queue/worker), caching (Redis), and relational data modeling (MySQL/PostgreSQL-style SQL).
+\item - Shipped 0$\rightarrow$1 systems and large refactors supporting internet-scale traffic (e.g., 600M pushes/day; 150M daily visits), improving freshness and tail latency with measurable results.
+\end{rSection}
+
+% ===================== EXPERIENCE =====================
+\begin{rSection}{Experience}\sectionvspace
+% 简单介绍一下Baidu：中国Google
+\textbf{Baidu, Inc. (China’s leading search engine company, called “the Google of China”)} \hfill \textit{Beijing, China}\\
+\textit{Senior Software Engineer (promotions: Oct 2021; Jul 2023)} \hfill \textit{Jul 2020 -- Aug 2024}
+\item \textbf{Roles:} Developer for Search Push \& Recommendation (Oct 2023 - Aug 2024) and Search DeepQA (Jul 2020 - Oct 2023).
+\item \textbf{Growth:} Promoted twice (T3$\rightarrow$T4 in Oct 2021; T4$\rightarrow$T5 in Jul 2023); performance ranked top 30\% (M+) in 2021-2022.
+
+\vspace{1.0ex}
+\item \textbf{Push \& Recommendation Service (2023--2024)}
+\begin{itemize}
+  \item \textbf{Background:} Deliver time-sensitive hotspots/news through interest-based recommendation and improve user engagement.
+  \item \textbf{Design:} Built a unified data storage/serving platform that connected Search data, recommendation strategies, and distribution channels; implemented a hybrid \textbf{stream+batch} processing workflow for ingestion $\rightarrow$ feature generation $\rightarrow$ delivery.
+  \item \textbf{Benefit:} Enabled faster model/data iteration on the shared platform and improved content freshness by reducing end-to-end availability latency from \textbf{24h to 30min}.
+  \item \textbf{Impact:} Scaled to \textbf{600M pushes/day} and \textbf{2.6M daily unique visitors}, contributing \textbf{\textasciitilde320K CNY/day} in attributed revenue.
+\end{itemize}
+
+\vspace{0.5ex}
+\item \textbf{DeepQA Search \& Wenxin Yiyan App (2020--2023)}
+\begin{itemize}
+  \item \textbf{Background:} Supported Baidu Search’s QA and LLM-powered experiences, requiring reliable offline indexing and low-latency online retrieval with controlled feature rollout.
+  \item \textbf{Design:} Built and maintained multiple microservices for offline indexing and online retrieval (query generalization, batch recall, ranking interfaces), plus an access-management service (activation/invitations/verification) backed by MySQL + Redis.
+  \item \textbf{Benefit:} Refactored DeepQA core services by removing legacy logic and enabling parallel content fetching (author/site/ source/reco), reducing long-tail latency by \textbf{63\%}; stabilized LLM feature access via cached permission state and automated eligibility checks.
+  \item \textbf{Impact:} Served \textbf{\textasciitilde150M daily visits}; supported \textbf{600+ partner sites} for custom page hosting contributing \textbf{\textasciitilde22M visits/day} and \textbf{\textasciitilde260K CNY/day} in ad revenue.
+\end{itemize}
+
+\vspace{0.5ex}
+\item \textbf{Streaming Data Indexing Pipeline (2021--2022)}
+\begin{itemize}
+  \item \textbf{Background:} Multiple products relied on a batch-only indexing with slow incremental updates (\textbf{48h}), increasing iteration cost and delaying launches.
+  \item \textbf{Design:} Built a reusable stream+batch unified indexing  service and productized it for multiple consumers (DeepQA, Note Search, Local Life), including feature computation and automated validation workflows.
+  \item \textbf{Benefit:} Cut incremental data update time \textbf{48h $\rightarrow$ 5min}; enabling near-real-time updates and faster QA feedback loops.
+  \item \textbf{Impact:} Onboarded \textbf{400+ providers}; processed \textbf{\textasciitilde40K updates/day} for DeepQA and supported \textbf{600M+ cumulative updates} for Note Search; built a trace/debug tool that helped triage \textbf{\textasciitilde150 error traces/month}.
+\end{itemize}
+
+\end{rSection}
+
+% ===================== RESEARCH / PROJECTS =====================
+\begin{rSection}{Selected Research Projects}\sectionvspace
+% 尽量1句话说清楚（especially problem）
+\textbf{SafeKV: Privacy Enforcement + KV-Cache Management for Multi-Tenant LLM Serving} \hfill \textit{Apr 2025 -- Aug 2025}
+\begin{itemize}
+  \item \textbf{Problem:} Cross-tenant KV reuse can leak sensitive prefixes via timing/cache-state side channels, while strict per-tenant isolation degrades cache hit rate and throughput.
+  \item \textbf{Approach:} Co-designed an asynchronous privacy pipeline with a unified cache index using per-entry visibility control to gate promotion from private to shareable.
+  \item \textbf{Evidence:} In prototype evaluation, reduced timing-based KV side-channel attack success by \textbf{94\%} and improved throughput by \textbf{2.66$\times$} versus isolation under matched resource limits.
+  \item \textbf{Impact:} Enables practical cache reuse in shared serving without requiring invasive changes beyond cache insert/lookup/evict and metadata handling.
+\end{itemize}
+
+\newpage
+\textbf{MCaM: Multi-Tier KV-Cache Reuse Across Requests for LLMs} \hfill \textit{Nov 2023 -- Aug 2024}
+\begin{itemize}
+  % \textbf{Approach:} 等去掉
+  % 左侧margin的空间
+  \item \textbf{Problem:} Repeated prefixes cause redundant prefill compute and inflate TTFT, especially under multi-request workloads with limited GPU memory.
+  \item \textbf{Approach:} Built a unified multi-tier cache with prefix hashing, deduplication, and GPU--CPU offloading to maximize reuse under bounded memory.
+  \item \textbf{Evidence:} Achieved \textbf{69\%} reduction in prefill latency and \textbf{3.3$\times$} throughput improvement with minimal additional memory overhead in evaluation.
+  \item \textbf{Impact:} Provides a production-friendly reuse path that improves responsiveness without requiring model changes.
+\end{itemize}
+
+\textbf{DynaExq: Runtime-Aware Expert Quantization for Efficient MoE Inference} \hfill \textit{Aug 2025 -- Nov 2025}
+\begin{itemize}
+  \item \textbf{Problem:} MoE serving is bottlenecked by expert compute and memory bandwidth, and static quantization often misallocates precision under workload shifts.
+  \item \textbf{Approach:} Designed token- and expert-aware precision selection using activation statistics and latency budgets to adjust expert quantization at runtime.
+  \item \textbf{Evidence:} Reduced expert compute cost while keeping accuracy within \textbf{0.1--0.3\%} of FP16 baselines across multiple MoE models (per internal benchmarks).
+  \item \textbf{Impact:} Improves cost/performance of MoE inference while preserving quality guarantees needed for production serving.
+\end{itemize}
+
+\textbf{FlexMoE: Adaptive Expert Prefetching + Cache-Aware Routing for Fast MoE Inference} \hfill \textit{Oct 2024 -- Jun 2025}
+\begin{itemize}
+  \item \textbf{Problem:} Expert swapping/prefetching is error-prone under bandwidth limits, producing queueing and tail latency spikes during decode.
+  \item \textbf{Approach:} Built a proactive caching and prefetch policy conditioned on runtime bandwidth, expert sizes, and token-level signals.
+  \item \textbf{Evidence:} Kept expert wait time under \textbf{2\%} of end-to-end latency and improved expert prediction accuracy by \textbf{30\%+} across tested workloads.
+  \item \textbf{Impact:} Stabilizes MoE serving under shifting workloads by turning expert movement into a controlled, measurable policy.
+\end{itemize}
+
+\end{rSection}
+
+% ===================== EDUCATION =====================
+\begin{rSection}{Education}\sectionvspace
+\textbf{University of Connecticut}, CT, USA (GPA:3.91) \hfill \textit{Ph.D., Computer Science \& Engineering \ \ (Aug 2024 -- Present)}\\
+\textbf{Hefei University of Technology}, China \hfill \textit{M.S., Electrical Engineering \ \ (Aug 2017 -- Jun 2020)}\\
+\textbf{Hefei University of Technology}, China \hfill \textit{B.S., Electrical Engineering \ \ (Aug 2013 -- Jun 2017)}
+\end{rSection}
+
+% ===================== PUBLICATIONS =====================
+\begin{rSection}{Publications}\sectionvspace
+\item K. Chu, et al. \textit{MCaM: Efficient LLM Inference with Multi-tier KV Cache Management}. ICDCS 2025.
+\item K. Chu, et al. \textit{FlexMoE: Adaptive Expert Prefetching and Cache-Aware Routing for Fast MoE Inference}. ICDCS 2026 (under review).
+\item K. Chu, et al. \textit{SafeKV: System-Level Co-Design of Privacy Enforcement and KV-Cache Management for LLM Serving}. VLDB 2026 (under review).
+\item K. Chu, et al. \textit{DynaExq: Runtime-Aware Expert Quantization for Efficient MoE Inference}. DAC 2026 (under review).
+\end{rSection}
+
+% ===================== SKILLS =====================
+\begin{rSection}{Technical Skills}\sectionvspace
+\begin{tabular}{@{} >{\bfseries}l @{\hspace{2.2ex}} p{0.83\linewidth} @{}}
+% 加上能力level
+Languages & 
+Python (\textit{Expert}), Go (\textit{Proficient}), C++ (\textit{Proficient}) \\
+% 工业能力，具体一些，evidence：SQL，K8s，AWS
+Systems \& Infra &
+Linux; FastAPI; Multithreading; gRPC/HTTP; Gin; MySQL/SQL; Git; containerization (Docker); basic Kubernetes; CI/CD; profiling tools (e.g., perf) \\
+
+Data \& Storage &
+MySQL; PostgreSQL(\textit{Familier}); Redis; ANNS/Faiss(HNSW,Vamana,IVF); Kafka; Hadoop \\
+
+ML/Serving &
+PyTorch; Transformers; vLLM; SGLang; LangChain, CUDA, DeepEP, LLM APIs \\
+\end{tabular}
+\end{rSection}
+
+% ===================== AWARDS =====================
+\begin{rSection}{Awards}\sectionvspace
+\item Predoctoral Fellowship, University of Connecticut (2025)
+\item Baidu Pride Special Award (2022); 
+\item Baidu Breakthrough Innovation Award (2021--2022)
+\item National Scholarship, Hefei University of Technology (2018, 2019)
+\end{rSection}
+
+\end{document}

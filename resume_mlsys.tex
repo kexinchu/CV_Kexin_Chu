@@ -1,0 +1,177 @@
+\documentclass[]{resume}
+
+\usepackage{XCharter}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{array}
+
+% ---------- Layout ----------
+\geometry{left=0.28in,right=0.28in,top=0.34in,bottom=0.12in}
+\setlength{\tabcolsep}{3pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.1em, itemsep=0.45pt, topsep=0.8pt, parsep=0pt, partopsep=0pt}
+
+% resume.cls auto-prints \name/\address at \begin{document}; disable it since we use a custom header.
+\makeatletter
+\renewcommand{\printname}{}
+\renewcommand{\printaddress}[1]{}
+\makeatother
+\setlength{\emergencystretch}{1.5em}
+
+\renewenvironment{rSection}[1]{%
+  \vspace{0.3em}%
+  \MakeUppercase{\textbf{#1}}%
+  \vspace{0.16em}%
+  \hrule
+  \vspace{0.22em}%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{0.85em}%
+    \setlength{\rightmargin}{0em}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\topsep}{0pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+  }%
+  \item[]%
+}{%
+  \end{list}%
+  \vspace{-0.28em}%
+}
+
+\newcommand{\entryspace}{\vspace{0.35ex}}
+
+% ---------- Header ----------
+\definecolor{HeaderOrange}{HTML}{F36C21}
+\definecolor{HeaderLight}{HTML}{F7F7F7}
+
+\newcommand{\MakeHeader}[8]{%
+\noindent
+{\centering \bfseries \Large #1 \par}
+\vspace{2pt}
+
+\noindent
+\colorbox{HeaderOrange}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \centering
+    {\color{white}\bfseries\small #2}
+    \vspace{2pt}
+  }%
+}\par
+
+\noindent
+\colorbox{HeaderLight}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \scriptsize
+    \faPhone\ #3 \hfill
+    \faEnvelope\ \href{mailto:#4}{#4} \hfill
+    \faMapMarker*\ #5 \hfill
+    \faLinkedin\ \href{#6}{kexinchu} \hfill
+    \faGlobe\ \href{#7}{kexinchu.github.io} \hfill
+    \faGraduationCap\ \href{#8}{Scholar}
+    \vspace{2pt}
+  }%
+}\par
+}
+
+\begin{document}
+
+\MakeHeader
+{Kexin Chu}
+{ML Systems Researcher}
+{(+1) 959-995-3930}
+{kexin.chu@uconn.edu}
+{Farmington, CT}
+{https://www.linkedin.com/in/kexin-chu-69a481192}
+{https://kexinchu.github.io/}
+{https://scholar.google.com/citations?user=ZIdS3d0AAAAJ}
+
+\fontsize{10.35pt}{11.15pt}\selectfont
+
+% ===================== SUMMARY =====================
+\begin{rSection}{Summary}
+\begin{itemize}
+    \item Ph.D. candidate at UConn (Advisor: Prof.\ Wei Zhang) building ML infrastructure for deterministic inference, MoE acceleration, and privacy-aware LLM serving.
+    \item 4+ years leading engineering teams (6--12 people) across ML-powered products, large-scale search recommendation systems, and production inference services handling hundreds of millions of daily requests.
+    \item 9 publications in ML systems; research spans KV-cache sharing, vector databases for multimodal RAG, MoE inference, and dependable AI systems.
+\end{itemize}
+\end{rSection}
+
+% ===================== EXPERIENCE =====================
+\begin{rSection}{Experience}
+\textbf{QuarterMill} \hfill \textit{Remote}\\
+\textit{Technical Lead} \hfill \textit{Jun 2026 -- Present}
+\begin{itemize}
+    \item Led a 6-person engineering team to design and build QuarterMill's core product from scratch, owning architecture decisions, sprint planning, and delivery milestones.
+    \item Built the data infrastructure layer on Nebula, PGVector, and PostgreSQL; integrated OCR/HTR pipelines to extract structured information from heterogeneous document sources.
+    \item Developed agent-based workflows for automated quality assessment and claims extraction, powering the product's primary value pipeline.
+\end{itemize}
+
+\entryspace
+\textbf{Dongchedi (ByteDance)} \hfill \textit{Shanghai, China / Remote}\\
+\textit{LLM Algorithm Researcher Intern} \hfill \textit{Apr 2025 -- Oct 2025}
+\begin{itemize}
+    \item Worked on model-deployment optimization for AI Car Selection, supporting inference services handling 400K+ daily requests.
+    \item Built a quantization, offload, and prefetch pipeline for models that could not fit on a single 8xH20 node.
+    \item Addressed cross-node inference bottlenecks caused by memory pressure and interconnect data movement in large-model deployment.
+\end{itemize}
+
+\entryspace
+\textbf{Baidu, Inc.} \hfill \textit{Beijing, China}\\
+\textit{Senior Software Engineer / Architecture Lead} \hfill \textit{Jul 2020 -- Aug 2024}
+\begin{itemize}
+    \item Led a 12-person team as Search Recommendation architecture owner; promoted from T3 to T5 through sustained technical leadership across Push \& Recommendation, DeepQA Search, streaming indexing, and LLM access control.
+    \item Designed offline/online recommendation pipelines (Spark, Hadoop for batch; Golang + Gin for serving); cut data freshness latency from 24h to 30min and incremental indexing from 48h to 5min, supporting 600M pushes/day and 150M daily visits.
+    \item Refactored monolithic PHP services into modular Go services, reducing long-tail latency by 63\% and improving observability and parallel retrieval efficiency for high-traffic search workloads.
+    \item Built access-control infrastructure for Baidu's LLM-powered search features, enabling secure rollout and supporting 2M+ user registrations after launch.
+\end{itemize}
+\end{rSection}
+
+% ===================== RESEARCH / PUBLICATIONS =====================
+\begingroup
+\fontsize{9.95pt}{10.55pt}\selectfont
+\begin{rSection}{Research Publications \normalfont\small(\textbf{*} = representative work)}
+\textbf{LLM Memory Systems.}
+\begin{itemize}
+    \item \textit{MCaM} (ICDCS 2025)\textbf{*}: Targets repeated-prefix prefill overhead in shared LLM serving by coordinating KV-cache reuse across HBM, DRAM, and SSD tiers. It cuts prefill latency by 69\% and raises throughput by 3.3x.
+    \item \textit{SafeKV} (arXiv 2025)\textbf{*}: Targets privacy-safe shared KV-cache reuse in multi-tenant serving by isolating sensitive blocks while preserving reuse for non-sensitive prefixes. It preserves privacy while improving throughput by 2.66x over strict isolation.
+    \item \textit{ReLACE} (under review)\textbf{*}: Targets recall drift in dynamic multimodal retrieval under OOD queries and online updates to multimodal data. It maintains 93.7\%--97.8\% recall across changing workload conditions.
+    \item \textit{SQLens} (ongoing): Targets filtered vector search inefficiency when SQL predicates are applied after ANN traversal in PostgreSQL-based multimodal RAG backends. It delivers 1.4x--4.2x speedups across different selectivity settings.
+\end{itemize}
+
+\textbf{LLM Inference Optimization.}
+\begin{itemize}
+    \item \textit{ExpertFlow} (arXiv 2025): Targets host--GPU expert swap stalls in memory-constrained MoE inference through adaptive prefetching and cache-aware expert routing. It reduces model stall time to less than 0.1\% of baseline.
+    \item \textit{DynaExq} (arXiv 2025): Targets precision misallocation under strict GPU memory budgets in MoE serving by dynamically promoting hot experts instead of using a fixed bit-width map. It delivers up to 2.73x higher throughput over ExpertFlow.
+    \item \textit{MarginGate} (arXiv 2026): Targets batch-induced token flips in BF16 decoding without always-on verification. It restores 100\% deterministic decoding with 15.05\%--18.56\% trigger rates and cuts LLM-42 latency overhead by up to 2.23x.
+    \item \textit{LQM-ContextRoute} (arXiv 2026): Targets same-function tool-provider routing under runtime load and quality heterogeneity in LLM agents. It improves search F1 by 2.18 points and StrategyQA accuracy by up to 18 points over SW-UCB.
+\end{itemize}
+\end{rSection}
+\endgroup
+
+% ===================== EDUCATION =====================
+\begin{rSection}{Education}
+\textbf{University of Connecticut}, CT, USA \hfill Ph.D. in Computer Science and Engineering, GPA 3.91 \hfill \textit{Aug 2024 -- Present}\\
+\textbf{Hefei University of Technology}, China \hfill M.S. \& B.S. in Electrical Engineering \hfill \textit{Aug 2013 -- Jun 2020}
+\end{rSection}
+
+% ===================== SKILLS =====================
+\begin{rSection}{Technical Skills}
+\begin{tabular}{@{} >{\bfseries}l @{\hspace{1.2ex}} p{0.84\linewidth} @{}}
+Languages & Python (proficient), C++ (proficient), Go (familiar), SQL (familiar) \\
+ML / Serving & PyTorch, Transformers, vLLM, SGLang, CUDA \\
+Systems / Data & Linux, FastAPI, Redis, PostgreSQL, PGVector, Faiss, DiskANN, Docker, Git, Kafka, gRPC
+\end{tabular}
+\end{rSection}
+
+% ===================== AWARDS =====================
+\begin{rSection}{Awards}
+\textbf{Predoctoral Fellowship}, University of Connecticut (2025, 2026); \textbf{Baidu Pride Special Award} (2022); \textbf{Baidu Breakthrough Innovation Award} (2021--2022); \textbf{National Scholarship}, Hefei University of Technology (2018, 2019)
+\end{rSection}
+
+\end{document}

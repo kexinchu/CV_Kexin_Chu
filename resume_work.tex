@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 3.0 (December 17, 2022)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@latextemplates.com)
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	%a4paper, % Uncomment for A4 paper size (default is US letter)
+	11pt, % Default font size, can use 10pt, 11pt or 12pt
+]{resume} % Use the resume class
+
+\usepackage{XCharter} % Use the EB Garamond font
+
+%------------------------------------------------
+
+\name{Kexin Chu} % Your name to appear at the top
+
+% You can use the \address command up to 3 times for 3 different addresses or pieces of contact information
+% Any new lines (\\) you use in the \address commands will be converted to symbols, so each address will appear as a single line.
+
+\address{434 Ash Street, Willimantic, Connecticut 06226-1430, USA} % Main address
+% \address{Room 2105, Unit 2, Building 25, Phase 1, Donghuijiayuan, No. 3, Shuinan West 3rd Road, Tongzhou District, Beijing}
+\address{(+1) 959-995-3930}
+% \address{(+86) 15755152633}
+% \address{123 Pleasant Lane \\ City, State 12345} % A secondary address (optional)
+
+\address{chukexin2017@gmail.com} % Contact information
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	PROFILE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Profile}
+	
+    \item Experienced software engineer with a solid background in software development, system design, big data processing and LLM inference optimization. 
+    Skilled in Golang, Python, and C++. I have developed multiple services at Baidu Inc. 
+    I also have the experience working remotely with offsite teams on projects(China-USA), I believe I can work efficiently in a diverse, remote environment.\\
+	
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Work Experience}
+
+    \begin{rSubsection}{Baidu, Inc}{July 2020 - August 2024}{Senior Software Engineer}{Beijing, China}
+    \item Lead developer for Search Push and Recommendation Service (October 2023 - August 2024).
+    \item Lead developer for Search DeepQA Service (July 2020 - October 2023).
+    \item Promoted in October 2021 (T3->T4) and July 2023 (T4->T5) because of my exceptional performance (consistent top 30\% (M+) in 2021 and 2022).
+
+    \vspace{3ex}
+
+    \textbf{The Search Push and Recommendation Service}
+        \item It is a new business in Baidu's Search Growth Group, that aims to push high-quality hotspots, news, and reports to users through interest analysis to increase user activity.
+        \item Designed and developed the search push and recommendation service from 0 to 1, opening up the data flow across multiple business teams.
+        \item Built and optimized the database process, reducing the data upstream latency from 24h to 30min.
+        \item Restructured the business architecture of the Push products, breaking it down into two general workflows, improved the scalability while supporting existing products.
+        \item Achieved 600 million data distributions and generated a daily revenue of 320,000 CNY.
+
+    \vspace{1ex}
+
+    \textbf{The Search DQA Service}
+        \item DeepQA ams to enhance Baidu search's question-answering quality by leveraging machine learning to process and apply vast amount of data and domain knowledge.
+        \item Collaborated with the DeepQA strategy team to build an offline indexing and online retrieval framework, supporting query generalization, batch recalls, data formatting, and online ranking.
+        \item Reconstructed the service to address long-tail recall issues, migrating from PHP to Golang, enabling parallel database requests for materials, authors, site sources, and recommendation systems.
+        \item Enhanced service scalability and cross-department collaboration by implementing a modular, configurable code structure using a graphical framework.
+        \item Integrated Redis to store custom page flags for external site resource hosting, using consistent hashing encryption to ensure traffic filtering and prevent fraud.
+        \item Supported features like DQA web search, intelligent tag search, and generative AI search, handling about 150 million daily visits.
+        \item Managed over 600 websites for custom page hosting, generating 22 million daily visits and 260,000 CNY ad revenue per day.
+
+    \vspace{1ex}
+
+    \textbf{Streaming Data Indexing System}
+        \item The previous batch indexing process for DeepQA had poor update efficiency for incremental data (48h), increasing development and test costs for product iterations.
+        \item Developed a streaming indexing system to optimize data update efficiency using a hybrid stream-batch approach, later expanding to support note-search services.
+        \item Reduced DQA indexing time from 48h to 5 minutes and shortened material validation cycles for the note-streaming system from 2 weeks to 1 day, including image feature computation.
+        \item Managed over 400 resource providers, updating around 40,000 resources daily for DQA search, with more than 600 million resources updated for note services since launch.
+        \item Created a simple trace tool based on the company's indexing query interface, allowing product and operations teams to monitor indexing progress, processing about 150 error traces monthly.
+
+    \vspace{1ex}
+        
+    \textbf{The Wenxin Yiyan Access Management System for Baidu Search}
+	  \item Developed and maintained the user access management system for integrating Wenxin Yiyan into Baidu Search, providing features like new user activation, friend invitations, and access verification.
+        \item Managed user permissions, invitation codes, and activation processes using MySQL and Redis.
+        \item Utilized Redis to store basic permission information, ensuring system stability.
+        \item Since its launch in March 2023, the system has supported the registration and activation of over 2 million users.
+    \end{rSubsection}
+\end{rSection}
+
+%------------------------------------------------
+
+\begin{rSection}{Research Experience}
+    \begin{rSubsection}{Baidu Inc. and University of Connecticut}{November 2023 - August 2024}{Employee, Research Assistant}{Beijing China}
+	\item For LLM inference tasks, redundant computations are caused in the prefill phase because of similar prefix tokens across different requests. 
+    \item Our work “CaR” can eliminates this redundant computation by reusing the KV cache of prefix tokens across requests, and reduces GPU memory overhead by offloading the KV cache storage to the host memory. 
+	\item We achieved a 60\% reduction in prefill latency, and the paper has been submitted for review. 
+    \end{rSubsection}
+    \begin{rSubsection}{Institute of Computing Technology, CAS, Beijing, China}{November 2018 - December 2019}{Intern Student}{Beijing, China}
+		\item Designed a new cache circuit and developed a test module based on the gem5 simulator to evaluate the fault tolerance and power consumption of this design.
+        \item Published academic paper at DATE Conference: ieeexplore.ieee.org/document/9116395
+    \end{rSubsection}
+
+\end{rSection}
+
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Education}
+	
+ %    \textbf{University of Connecticut, US CT} \hfill \textit{August 2024 - Present} \\ 
+	% PhD of Computer Science and Engineering. \\
+    \textbf{Hefei University of Technology, China} \hfill \textit{August 2017 - June 2020} \\ 
+	Master's degredd in EE, Focus on computer architecture and AI acceleration. \\
+    \textbf{Hefei University of Technology, China} \hfill \textit{August 2013 - June 2017} \\ 
+	Bachelor's degree in EE, Focus on digital circuit design and embedded system. \\
+	
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+%	TECHNICAL STRENGTHS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Technical Skills}
+
+	\begin{tabular}{@{} >{\bfseries}l @{\hspace{6ex}} l @{}}
+		  Languages & Golang, Python, C++ \\
+            Databases and Tools & MySQL, Redis, Hadoop \\
+            Skills & Algorithms, System Design, Machine Learning\\
+            Frameworks & vLLM, Pytorch, Gin, gRPC
+	\end{tabular}
+
+\end{rSection}
+
+%------------------------------------------
+
+% Languages
+\begin{rSection}{Languages}
+        \item English: Fluent (IELTS 6.5);
+        \item Chinese: Native Speaker
+        
+\end{rSection}
+
+% ----------------------------------------------
+
+%  AWARD SECTION
+\begin{rSection}{Awards}
+        \item Personal: Breakthrough Innovation Award(2021-2022) \\
+	Group: Baidu Pride Special Award(2022), Baidu Search R\&D Platform Breakthrough Award(2021-2022) \\
+        Scholar: National Scholarship Award(2018, 2019) and National Encourage Award(2014) \\
+        
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

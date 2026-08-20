@@ -1,0 +1,131 @@
+\documentclass[]{resume}
+
+\usepackage{XCharter}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{geometry}
+
+\geometry{left=0.34in,right=0.34in,top=0.46in,bottom=0.34in}
+\setlength{\tabcolsep}{5pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.2em, itemsep=1pt, topsep=2pt, parsep=0pt, partopsep=0pt}
+
+\makeatletter
+\renewcommand{\printname}{}
+\renewcommand{\printaddress}[1]{}
+\makeatother
+\newcommand{\sectionvspace}{\vspace{1.5pt}}
+
+\definecolor{HeaderOrange}{HTML}{F36C21}
+\definecolor{HeaderLight}{HTML}{F7F7F7}
+
+\newcommand{\MakeHeader}[5]{%
+\noindent
+{\centering \bfseries \LARGE #1 \par}
+\vspace{2pt}
+
+\noindent
+\colorbox{HeaderOrange}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \centering
+    {\color{white}\bfseries\normalsize #2}
+    \vspace{2pt}
+  }%
+}\par
+
+\noindent
+\colorbox{HeaderLight}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \small
+    \faPhone\ #3 \hfill
+    \faEnvelope\ \href{mailto:#4}{#4} \hfill
+    \faMapMarker*\ #5
+    \vspace{2pt}
+  }%
+}\par
+}
+
+\begin{document}
+
+\MakeHeader
+{Kexin Chu}
+{Student Assistant Candidate}
+{(+1) 959-995-3930}
+{kexin.chu@uconn.edu}
+{Farmington, CT}
+
+\begin{rSection}{Summary}\sectionvspace
+\begin{itemize}
+    \item UConn Ph.D. student with strong attention to detail, experience handling large volumes of digital information, and a consistent record of reliable, accurate work.
+    \item Experienced in organizing documents, reviewing data carefully, following established workflows, and completing tasks independently with minimal supervision.
+    \item Comfortable supporting time-sensitive requests, coordinating with teammates, and working carefully with both digital and physical materials in academic and professional settings.
+    \item Fluent in English and Chinese; well suited for resource-sharing, document delivery, scanning, and other library support tasks that require accuracy and dependability.
+\end{itemize}
+\end{rSection}
+
+\begin{rSection}{Education}\sectionvspace
+\textbf{University of Connecticut}, Storrs, CT \hfill \textit{Aug 2024 -- Present}\\
+Ph.D. Student, Computer Science and Engineering
+
+\textbf{Hefei University of Technology}, China \hfill \textit{Aug 2017 -- Jun 2020}\\
+M.S., Electrical Engineering
+
+\textbf{Hefei University of Technology}, China \hfill \textit{Aug 2013 -- Jun 2017}\\
+B.S., Electrical Engineering
+\end{rSection}
+
+\begin{rSection}{Relevant Experience}\sectionvspace
+
+\textbf{University of Connecticut / Research Work} \hfill \textit{2024 -- Present}\\
+\textit{Ph.D. Student and Researcher}
+\begin{itemize}
+    \item Read, organize, and manage a large number of academic papers, technical documents, and research materials with close attention to accuracy and completeness.
+    \item Work independently on long-term projects while coordinating with advisors and collaborators on shared research tasks and deadlines.
+    \item Regularly handle digital files, document versions, and structured information in a careful and systematic manner.
+\end{itemize}
+
+\textbf{Baidu, Inc.}, Beijing, China \hfill \textit{Jul 2020 -- Aug 2024}\\
+\textit{Senior Software Engineer}
+\begin{itemize}
+    \item Managed information-intensive workflows requiring precision, consistency, and careful review of large datasets, documents, and system outputs.
+    \item Followed established operational procedures for high-volume, time-sensitive work and maintained a strong record of reliability in a fast-paced team environment.
+    \item Coordinated across teams to deliver materials accurately and on time, while also completing assigned tasks independently with minimal supervision.
+    \item Earned two promotions based on strong performance, dependable execution, and sustained attention to quality.
+\end{itemize}
+
+\textbf{Institute of Computing Technology, Chinese Academy of Sciences} \hfill \textit{Nov 2018 -- Dec 2019}\\
+\textit{Research Intern}
+\begin{itemize}
+    \item Supported research tasks requiring careful record-keeping, repeated checking of results, and clear organization of project materials.
+    \item Contributed to academic work that resulted in a published conference paper, reflecting strong follow-through and detail-oriented work habits.
+\end{itemize}
+
+\end{rSection}
+
+\begin{rSection}{Skills and Strengths}\sectionvspace
+\begin{tabular}{@{} >{\bfseries}l @{\hspace{2ex}} p{0.82\linewidth} @{}}
+Core Strengths & Detail-oriented, dependable, organized, able to work independently, collaborative, comfortable following procedures \\ 
+
+Digital Work & Document handling, file organization, data entry, PDF and digital material review, scanning/digitization support, email communication \\ 
+
+Technical Tools & Microsoft Office, Google Docs/Sheets, LaTeX, Python, Linux, database and information systems \\ 
+
+Languages & English (fluent), Chinese (native) \\
+\end{tabular}
+\end{rSection}
+
+\begin{rSection}{Awards and Recognition}\sectionvspace
+\begin{itemize}
+    \item Predoctoral Fellowship, University of Connecticut (2025)
+    \item Baidu Breakthrough Innovation Award (2021--2022)
+    \item Baidu Pride Special Award (2022)
+    \item National Scholarship, Hefei University of Technology (2018, 2019)
+\end{itemize}
+\end{rSection}
+
+\end{document}

@@ -1,0 +1,208 @@
+\documentclass[]{resume}
+
+\usepackage{XCharter}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{CJKutf8}
+
+% ---------- Layout ----------
+\geometry{left=0.72in,right=0.72in,top=0.6in,bottom=0.42in}
+\setlength{\tabcolsep}{3pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.1em, itemsep=2.2pt, topsep=2.5pt, parsep=1pt, partopsep=0pt}
+
+% resume.cls auto-prints \name/\address at \begin{document}; disable it since we use a custom header.
+\makeatletter
+\renewcommand{\printname}{}
+\renewcommand{\printaddress}[1]{}
+\makeatother
+\setlength{\emergencystretch}{1.5em}
+
+\renewenvironment{rSection}[1]{%
+  \vspace{0.5em}%
+  \textbf{#1}%
+  \vspace{0.16em}%
+  \hrule
+  \vspace{0.25em}%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{0.85em}%
+    \setlength{\rightmargin}{0em}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\topsep}{0pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+  }%
+  \item[]%
+}{%
+  \end{list}%
+  \vspace{-0.28em}%
+}
+
+\newcommand{\entryspace}{\vspace{1.5ex}}
+
+% ---------- Header ----------
+\definecolor{HeaderOrange}{HTML}{F36C21}
+\definecolor{HeaderLight}{HTML}{F7F7F7}
+
+\newcommand{\MakeHeader}[8]{%
+\noindent
+{\centering \bfseries \Large #1 \par}
+\vspace{2pt}
+
+\noindent
+\colorbox{HeaderOrange}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \centering
+    {\color{white}\bfseries\small #2}
+    \vspace{2pt}
+  }%
+}\par
+
+\noindent
+\colorbox{HeaderLight}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \scriptsize
+    \faPhone\ #3 \hfill
+    \faEnvelope\ \href{mailto:#4}{#4} \hfill
+    \faMapMarker*\ #5 \hfill
+    \faLinkedin\ \href{#6}{kexinchu} \hfill
+    \faGlobe\ \href{#7}{kexinchu.github.io} \hfill
+    \faGraduationCap\ \href{#8}{Scholar}
+    \vspace{2pt}
+  }%
+}\par
+}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+\MakeHeader
+{Kexin Chu / 储可新}
+{AI Agent Systems Engineer / LLM Infrastructure}
+{(+86) 157-5515-2633}
+{kexin.chu@uconn.edu}
+{Farmington, CT (Remote preferred)}
+{https://www.linkedin.com/in/kexin-chu-69a481192}
+{https://kexinchu.github.io/}
+{https://scholar.google.com/citations?user=ZIdS3d0AAAAJ}
+
+\fontsize{10.3pt}{12.1pt}\selectfont
+
+% ===================== SUMMARY =====================
+\begin{rSection}{Summary / 个人概述}
+\begin{itemize}
+    \item UConn CS Ph.D. candidate (Advisor: Prof.\ Wei Zhang)，研究方向为 LLM Agent 系统的确定性推理、可靠服务与高效调度。
+    \item 4+ 年工程团队 研发 和 团队管理 经验，覆盖 AI Agent 产品从零到一、大规模搜索推荐系统架构、以及生产级 LLM 推理服务（日均数亿请求）。
+    \item 自研确定性 Agent DAG 编排框架，主张 Agent 系统的每一步输出可复现、可验证、可追溯；熟练使用 LangChain / LangGraph 构建生产级 Agent 应用。
+    \item 多篇 ML Systems 方向论文，涵盖 KV-cache 共享、Agent memory safety、Agent tool routing、MoE 推理加速、向量检索等；部分发表于 ICDCS/EuroSys/EMNLP 等会议，其余在审。
+\end{itemize}
+\end{rSection}
+
+% ===================== EXPERIENCE =====================
+\begin{rSection}{Experience / 工作经历}
+\textbf{QuarterMill} \hfill \textit{Remote}\\
+\textit{Technical Lead} \hfill \textit{Jun St 2026 -- Present}
+\begin{itemize}
+    \item 带领 6 人工程团队，从零设计并构建 QuarterMill 核心产品，负责整体架构决策、迭代节奏与交付管理；制定技术路线图并主导 code review 与技术方案评审。
+    \item 设计并实现自研确定性 Agent DAG 编排系统：将文档处理拆解为 OCR/HTR 提取 $\rightarrow$ 结构化信息解析 $\rightarrow$ 质量评估 $\rightarrow$ Claims 生成 的多步 Agent pipeline，确保每一步输出确定性可复现。
+    \item 核心设计哲学：Agent workflow 采用 DAG 编排而非 chain-of-thought 自由生成，每个 Agent node 有明确的输入 schema、输出 schema 和 deterministic execution guarantee，拒绝不可控的随机输出。
+    \item 构建核心数据基础设施层：基于 Nebula (graph DB) 建模实体关系，PGVector 支撑语义检索，PostgreSQL 存储结构化元数据，三者协同支撑异构文档的存储、检索与关联分析。
+    \item 集成 OCR/HTR pipeline 处理手写体、印刷体、表格等多类文档源，通过自定义预处理（去噪、旋转矫正、版面分析）与后处理（置信度过滤、跨字段校验）逻辑将提取准确率提升至生产可用水平。
+    \item 开发 Agent 驱动的质量评估模块：基于 LLM 自动评估提取信息的完整性与一致性，生成结构化的 quality score 和 claims，作为下游决策的输入依据。
+\end{itemize}
+
+\entryspace
+\textbf{Dongchedi / 懂车帝 (ByteDance)} \hfill \textit{Shanghai, China / Remote}\\
+\textit{LLM Algorithm Researcher Intern} \hfill \textit{Apr 2025 -- Oct 2025}
+\begin{itemize}
+    \item 负责"AI 选车"产品的模型部署优化，该推理服务日均处理 40 万+ 请求，需要在严格延迟预算（P99 < 2s）下服务多个大模型。
+    \item 针对无法装入单台 8$\times$H20 节点的大模型，设计并实现量化 + offload + prefetch 联合 pipeline，在显存受限条件下保持推理质量与吞吐。
+    \item 分析并解决跨节点推理中的内存压力与互联数据搬运瓶颈，通过 profiling 定位 stall 点并设计 compute-communication overlap 策略减少 GPU idle time。
+    \item 与上游模型团队协作确定量化方案（INT8/FP8），通过对比实验验证精度损失在业务指标可接受范围内（准确率下降 < 0.5\%）。
+    \item 输出部署方案文档与 best practice，为团队后续大模型上线提供可复用的标准化部署流程。
+\end{itemize}
+
+\entryspace
+\textbf{Baidu, Inc. / 百度} \hfill \textit{Beijing, China}\\
+\textit{Senior Software Engineer / Architecture Lead} \hfill \textit{Jul 2020 -- Aug 2024}
+\begin{itemize}
+    \item 担任搜索推荐架构负责人，带领 12 人团队，覆盖搜索 Push \& 推荐、DeepQA 搜索、流式索引和 LLM 权限管控等方向；4 年内从 T3 晋升至 T5（跨两级晋升）。
+    \item 设计离线/在线推荐全链路 pipeline：离线基于 Spark + Hadoop 进行特征计算与大规模数据处理（日处理数据量 TB 级），在线基于 Golang + Gin 构建低延迟服务层，形成完整的数据 $\rightarrow$ 模型 $\rightarrow$ 服务 编排链路（与 Agent pipeline 编排理念相通）。
+    \item 将数据新鲜度延迟从 24 小时压缩至 30 分钟，增量索引延迟从 48 小时压缩至 5 分钟，支撑日均 6 亿 push 和 1.5 亿日活访问。
+    \item 主导单体 PHP 服务向模块化 Go 微服务的重构，长尾延迟降低 63\%，显著提升系统可观测性与高并发场景下的检索效率；引入 gRPC 替代 HTTP 调用，服务间通信延迟进一步降低。
+    \item 构建百度 LLM 搜索功能的权限管控基础设施（角色分级、API 限流、灰度策略），支持安全灰度发布，上线后支撑 200 万+ 用户注册。
+    \item 建立团队技术规范：推动代码审查制度、上线 checklist、以及基于 Kafka 的异步消息解耦架构，提升团队工程效率与系统稳定性。
+\end{itemize}
+\end{rSection}
+
+% ===================== RESEARCH / PUBLICATIONS =====================
+\begingroup
+\fontsize{9.85pt}{11.2pt}\selectfont
+\begin{rSection}{Research / 研究成果}
+
+\textbf{Agent 系统与可靠推理}
+\begin{itemize}
+    \item \textit{MemKernel} (AAAI 2026, under review)\textbf{*}: 针对 parallel coding agents 中持久化 tool observation 的权限失效问题——observation 在跨 session 复用时其 evidence、依赖或 policy 可能已变更。提出 transactional reference-monitor，enforce lifecycle-serializable authority。在 16,464 次 lifecycle trials 中消除全部 2,426 个 invalid commits，同时接受所有 1,908 个合法操作。
+    \item \textit{LQM-ContextRoute} (arXiv 2026)\textbf{*}: 针对 LLM Agent 在多个同功能 tool provider 间的路由问题——运行时各 provider 的负载和质量动态变化，传统 bandit 方法无法适应。提出基于 context-aware routing 的方案，Search F1 提升 2.18 points，StrategyQA 准确率最高提升 18 points（vs. SW-UCB）。
+    \item \textit{MarginGate} (arXiv 2026)\textbf{*}: 针对 batch 推理中 BF16 精度导致的 token flip（同一 prompt 不同 batch size 产生不同输出），设计选择性验证机制。在不需 always-on verification 的前提下恢复 100\% 确定性解码，trigger rate 仅 15--19\%，延迟开销降低最多 2.23x。
+\end{itemize}
+
+\textbf{LLM Memory Systems}
+\begin{itemize}
+    \item \textit{MCaM} (ICDCS 2025)\textbf{*}: 通过跨 HBM/DRAM/SSD 三级存储协调 KV-cache 复用，解决 shared LLM serving 中重复前缀的 prefill 开销。Prefill 延迟降低 69\%，吞吐提升 3.3x。
+    \item \textit{SafeKV} (arXiv 2025)\textbf{*}: 在多租户 LLM serving 中实现隐私安全的 KV-cache 共享——隔离敏感 block 同时保留非敏感前缀的复用。在保护隐私前提下，吞吐相比严格隔离方案提升 2.66x。
+    \item \textit{ReLACE} (under review)\textbf{*}: 针对动态多模态检索中 OOD query 和在线数据更新导致的 recall 漂移问题，在变化的 workload 条件下维持 93.7\%--97.8\% recall。
+    \item \textit{SQLens} (ongoing): 针对 PostgreSQL-based multimodal RAG 后端中 SQL 谓词在 ANN 遍历后过滤导致的效率问题，在不同 selectivity 设置下实现 1.4x--4.2x 加速。
+\end{itemize}
+
+\textbf{MoE 推理加速}
+\begin{itemize}
+    \item \textit{ExpertFlow} (arXiv 2025): 通过自适应 prefetch 和 cache-aware expert routing 解决显存受限 MoE 推理中的 host--GPU expert swap stall，将 stall time 降至 baseline 的 0.1\% 以下。
+    \item \textit{DynaExq} (arXiv 2025): 在严格 GPU 显存预算下动态提升 hot expert 精度（而非固定 bit-width），吞吐相比 ExpertFlow 最高提升 2.73x。
+\end{itemize}
+\end{rSection}
+\endgroup
+
+% ===================== EDUCATION =====================
+\begin{rSection}{Education / 教育背景}
+\textbf{University of Connecticut}, CT, USA \hfill Ph.D. in Computer Science and Engineering, GPA 3.91 \hfill \textit{Aug 2024 -- Present}\\
+\quad Advisor: Prof.\ Wei Zhang \hfill 方向: ML Systems, LLM Inference, Deterministic Agent Serving\\
+\quad 核心课题：LLM Agent 系统的确定性保障、KV-cache 多级复用、MoE 推理加速\\[2pt]
+\textbf{Hefei University of Technology / 合肥工业大学}, China \hfill M.S. \& B.S. in Electrical Engineering \hfill \textit{Aug 2013 -- Jun 2020}\\
+\quad 本硕连读，硕士方向为信号处理与机器学习；在读期间连续获得国家奖学金。
+\end{rSection}
+
+% ===================== SKILLS =====================
+\begin{rSection}{Technical Skills / 技术栈}
+\begin{tabular}{@{} >{\bfseries}l @{\hspace{1.2ex}} p{0.82\linewidth} @{}}
+Languages & Python (精通), C++ (熟练), Go (熟练), SQL (熟练), Bash \\
+Agent / LLM & LangChain, LangGraph, Function Calling, Custom DAG Orchestration, RAG Pipeline, Prompt Engineering, Tool Use Design \\
+ML / Serving & PyTorch, Transformers, vLLM, SGLang, CUDA, ONNX, TensorRT, Quantization (INT8/FP8) \\
+Systems / Data & Linux, FastAPI, Redis, PostgreSQL, PGVector, Nebula, Faiss, DiskANN, Docker, K8s, Git, Kafka, gRPC, Spark, Hadoop \\
+Engineering & 系统架构设计, 微服务拆分, CI/CD, 灰度发布, 性能 Profiling, 技术方案评审
+\end{tabular}
+\end{rSection}
+
+% ===================== AWARDS =====================
+\begin{rSection}{Awards / 获奖}
+\begin{itemize}
+    \item \textbf{Predoctoral Fellowship}，University of Connecticut (2025, 2026)\\
+    连续两年获得 UConn 博士预科奖学金，用于支持 ML Systems 方向全职研究。
+    \item \textbf{Baidu Pride Special Award / 百度骄傲特别奖} (2022)\\
+    百度年度最高荣誉之一，授予在公司业务中做出突出贡献的团队/个人，全公司获奖比例 < 1\%。
+    \item \textbf{Baidu Breakthrough Innovation Award / 百度突破创新奖} (2021--2022)\\
+    连续两年获得，表彰在搜索推荐架构创新中的技术突破（数据时效性优化、微服务重构等）。
+    \item \textbf{National Scholarship / 国家奖学金}，合肥工业大学 (2018, 2019)\\
+    中国教育部颁发的最高级别奖学金，研究生阶段连续两年获得，获奖比例约为同专业前 2\%。
+\end{itemize}
+\end{rSection}
+
+\end{CJK}
+\end{document}

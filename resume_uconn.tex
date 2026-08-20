@@ -1,0 +1,198 @@
+\documentclass[]{resume}
+
+\usepackage{XCharter}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{array}
+
+% ---------- Layout ----------
+\geometry{left=0.34in,right=0.34in,top=0.46in,bottom=0.34in}
+\setlength{\tabcolsep}{4pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.2em, itemsep=1pt, topsep=2pt, parsep=0pt, partopsep=0pt}
+
+% resume.cls auto-prints \name/\address at \begin{document}; disable it since we use a custom header.
+\makeatletter
+\renewcommand{\printname}{}
+\renewcommand{\printaddress}[1]{}
+\makeatother
+\newcommand{\sectionvspace}{\vspace{1.5pt}}
+
+% ---------- Header ----------
+\definecolor{HeaderOrange}{HTML}{F36C21}
+\definecolor{HeaderLight}{HTML}{F7F7F7}
+
+\newcommand{\MakeHeader}[8]{%
+\noindent
+{\centering \bfseries \LARGE #1 \par}
+\vspace{2pt}
+
+\noindent
+\colorbox{HeaderOrange}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \centering
+    {\color{white}\bfseries\normalsize #2}
+    \vspace{2pt}
+  }%
+}\par
+
+\noindent
+\colorbox{HeaderLight}{%
+  \parbox{\textwidth}{%
+    \vspace{2pt}
+    \small
+    \faPhone\ #3 \hfill
+    \faEnvelope\ \href{mailto:#4}{#4} \hfill
+    \faMapMarker*\ #5 \hfill
+    \faLinkedin\ \href{#6}{kexinchu} \hfill
+    \faGithub\ \href{#7}{kexinchu} \hfill
+    \faGraduationCap\ \href{#8}{Google Scholar}
+    \vspace{2pt}
+  }%
+}\par
+}
+
+\begin{document}
+
+\MakeHeader
+{Kexin Chu}
+{Ph.D. Researcher in ML Systems -- University of Connecticut}
+{(+1) 959-995-3930}
+{kexin.chu@uconn.edu}
+{Farmington, CT}
+{https://www.linkedin.com/in/kexin-chu-69a481192}
+{https://kexinchu.github.io/}
+{https://scholar.google.com/citations?user=ZIdS3d0AAAAJ}
+
+% ===================== SUMMARY =====================
+\begin{rSection}{Summary}\sectionvspace
+\begin{itemize}[leftmargin=1.2em, itemsep=0.15em, topsep=0.2em]
+    \item Ph.D. student in Computer Science at UConn, focused on ML systems for LLM/MoE serving, KV-cache management, high-performance ANNS, and inference correctness.
+    \item Research spans LLM serving efficiency, multimodal retrieval, and deterministic inference -- with results published at and under review at top venues (ICDCS, SOSP).
+\end{itemize}
+\end{rSection}
+
+% ===================== EDUCATION =====================
+\begin{rSection}{Education}\sectionvspace
+\textbf{University of Connecticut}, CT, USA  (GPA:3.91) \hfill \textit{Aug 2024 -- Present}\\
+Ph.D. in Computer Science and Engineering
+
+\textbf{Hefei University of Technology}, China \hfill \textit{Aug 2017 -- Jun 2020}\\
+M.S. in Electrical Engineering
+
+\textbf{Hefei University of Technology}, China \hfill \textit{Aug 2013 -- Jun 2017}\\
+B.S. in Electrical Engineering
+\end{rSection}
+
+% ===================== PUBLICATIONS =====================
+\begin{rSection}{Publications}\sectionvspace
+\item K. Chu, et al. \textit{Dynamic OOD Graph ANNS for Multimodal RAG: Interference-Aware Continuous Repair}. Under review at SOSP 2026.
+\item K. Chu, et al. \textit{MCaM: Efficient LLM Inference with Multi-tier KV Cache Management}. ICDCS 2025.
+\item K. Chu, et al. \textit{SafeKV: System-Level Co-Design of Privacy Enforcement and KV-Cache Management for LLM Serving}. Under review at EuroSys.
+\item K. Chu, et al. \textit{FlexMoE: Adaptive Expert Prefetching and Cache-Aware Routing for Fast MoE Inference}. Under review at ICCAD 2026.
+\item K. Chu, et al. \textit{DynaExq: Runtime-Aware Expert Quantization for Efficient MoE Inference}. Under review at ICCAD 2026.
+\end{rSection}
+
+% ===================== RESEARCH =====================
+\begin{rSection}{Research Projects (UConn)}\sectionvspace
+
+\textbf{Deterministic LLM Inference} \hfill \textit{Mar 2026 -- Present}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Investigating sources of non-determinism in LLM inference across GPU parallelism, floating-point reductions, and runtime scheduling that cause identical inputs to produce different outputs across runs.
+    \item Designing a system to enforce bit-exact reproducibility for LLM inference without sacrificing throughput, targeting production serving systems (vLLM/SGLang) and safety-critical applications.
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{Dynamic OOD Graph ANNS for Multimodal RAG} \hfill \textit{Nov 2025 -- Apr 2026}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Identified that cross-modal (text-over-image/video) OOD queries require up to 9.2$\times$ more graph node visits than in-distribution queries, with ongoing dynamic updates continuously degrading the reachability structure.
+    \item Designed an interference-aware continuous repair system with online repair-worthiness prediction, grouped local repair, and a latency-aware controller that bounds tail-latency impact during live serving.
+    \item Stabilized recall at 93.7\%--97.8\% across three cross-modal datasets over 5-hour dynamic workloads; P99 latency spikes reduced by over 2$\times$ vs.\ periodic-repair baselines. \textit{Under review at SOSP 2026.}
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{SafeKV: Privacy-Aware KV-Cache Management for Shared LLM Serving} \hfill \textit{Apr 2025 -- Aug 2025}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Designed a cache visibility control mechanism for multi-tenant KV reuse in shared LLM serving.
+    \item Combined asynchronous privacy enforcement with metadata-based gating for cache promotion and reuse.
+    \item Reduced timing-based KV side-channel attack success by 94\% while improving throughput by 2.66$\times$ versus strict isolation. \textit{Under review at EuroSys.}
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{DynaExq: Runtime-Aware Expert Quantization for MoE Inference} \hfill \textit{Jan 2025 -- Apr 2026}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Identified that static expert quantization misallocates precision under a fixed HBM budget due to heavy-tailed, task-dependent activation; designed a runtime precision residency manager that promotes/demotes expert precision based on observed router traffic.
+    \item Built non-blocking stream-parallel precision migration with pool-based memory management and admission control, keeping peak GPU usage within a hard 48\,GB HBM cap.
+    \item Recovered 79\% of INT2-to-INT4 accuracy gap (73.58\%$\to$77.15\% on Qwen3-MoE-80B) and achieved 2.73$\times$ throughput vs.\ offloading baselines. \textit{Under review at ICCAD 2026.}
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{FlexMoE: Adaptive Expert Prefetching for MoE Inference} \hfill \textit{Aug 2024 -- Apr 2026}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Identified a U-shaped overlap--pollution tradeoff in fixed-horizon cross-layer prefetching that inflates end-to-end latency by up to 2.5$\times$ across batch sizes; reframed the prefetch horizon as a runtime control variable.
+    \item Designed a closed-loop controller with EMA-smoothed stall/eviction signals, a CPU-side delta-adjusted expert forecaster, and a residency-aware two-tier cache with cache-aware token routing.
+    \item Raised expert prediction accuracy by 21.8\% and reduced cache-miss latency by 13$\times$ (geometric mean) across 3 MoE models on 3 accelerators. \textit{Under review at ICCAD 2026.}
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{MCaM: Multi-Tier KV-Cache Reuse for LLM Inference} \hfill \textit{Nov 2023 -- Aug 2024}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Built a multi-tier KV-cache system with prefix hashing, deduplication, and memory-aware GPU--CPU offloading.
+    \item Reduced redundant prefill computation across requests with similar prefixes under bounded GPU memory.
+    \item Achieved 69\% lower prefill latency and 3.3$\times$ higher throughput in prototype evaluation. \textit{Published at ICDCS 2025.}
+\end{itemize}
+
+\end{rSection}
+
+% ===================== EXPERIENCE =====================
+\begin{rSection}{Industry Experience}\sectionvspace
+
+\textbf{Dcar, Inc. (ByteDance automotive platform)} \hfill \textit{Beijing, China}\\
+\textit{ML Systems Engineer Intern} \hfill \textit{Apr 2025 -- Oct 2025}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Optimized the LLM serving system for Dcar's AI Car Selection service, supporting 400K+ daily requests.
+    \item Designed a resource-aware solution combining quantization and runtime offload/prefetch to address cross-node GPU inference inefficiency and oversized model memory footprints on a single 8$\times$H20 node.
+\end{itemize}
+
+\vspace{0.5ex}
+\textbf{Baidu, Inc. (China's leading search engine company)} \hfill \textit{Beijing, China}\\
+\textit{Senior Software Engineer} \hfill \textit{Jul 2020 -- Aug 2024}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.2em, topsep=0.2em]
+    \item Built and optimized Search Push \& Recommendation (600M pushes/day), DeepQA Search (150M daily visits), and real-time streaming indexing pipelines; promoted twice (T3$\rightarrow$T5) in 3 years.
+    \item Reduced end-to-end data availability latency from 24 hours to 30 minutes and incremental indexing latency from 48 hours to 5 minutes via stream+batch pipeline redesigns.
+    \item Reduced long-tail service latency by 63\% through Go service decomposition and parallel retrieval.
+\end{itemize}
+
+\end{rSection}
+
+% ===================== SKILLS =====================
+\begin{rSection}{Technical Skills}\sectionvspace
+\begin{tabular}{@{} >{\bfseries}l @{\hspace{2ex}} p{0.84\linewidth} @{}}
+Languages &
+Python, Go, C++ \\
+
+ML / Serving &
+PyTorch, Transformers, vLLM, SGLang, CUDA, KV-cache reuse, deterministic inference \\
+
+Systems / Backend &
+Linux, gRPC, FastAPI, Gin, Redis, MySQL, Docker, Git \\
+
+Data / ANN &
+Faiss, HNSW, DiskANN, IVF, OOD graph repair, Kafka, Hadoop, Spark
+\end{tabular}
+\end{rSection}
+
+% ===================== AWARDS =====================
+\begin{rSection}{Awards}\sectionvspace
+\item Predoctoral Fellowship, University of Connecticut, 2025
+\item Baidu Pride Special Award, 2022
+\item Baidu Breakthrough Innovation Award, 2021--2022
+\item National Scholarship, Hefei University of Technology, 2018, 2019
+\end{rSection}
+
+\end{document}
